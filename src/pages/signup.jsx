@@ -81,7 +81,7 @@ const SignUp = () => {
           <Title innerText="Sign Up" />
           <p className="text-slate-400">Sign up to continue</p>
         </div>
-        <div className="flex flex-1 flex-col justify-center items-center">
+        <div className="flex flex-1 flex-col justify-center items-center pt-12">
           <div className="flex flex-col gap-12 justify-center items-center">
             <InputField
               label="Full Name"

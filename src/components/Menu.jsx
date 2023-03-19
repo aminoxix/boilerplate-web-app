@@ -40,11 +40,10 @@ const Menu = () => {
               key={menu.id}
             >
               <div
-                className={`material-symbols-outlined text-3xl ${
+                className={`material-symbols-outlined text-3xl text-white ${
                   menu.title.toLowerCase() ==
-                  location.pathname.slice(1).toLowerCase()
-                    ? `text-slate-400`
-                    : `text-white`
+                    location.pathname.slice(1).toLowerCase() &&
+                  `material-symbols-filled-outlined`
                 }`}
               >
                 {menu.image}
