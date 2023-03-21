@@ -51,8 +51,8 @@ const MenuPage = (props) => {
   }, []);
 
   return (
-    <div className="bg-brand font-inter h-screen w-screen inset-0 text-white flex flex-col">
-      <div className="bg-brand font-inter h-screen w-screen inset-0 py-6 px-6 2xl:px-[600px] xl:px-[400px] lg:px-[300px] text-white flex flex-col">
+    <div className="bg-brand font-inter h-screen w-screen inset-0 text-white flex flex-col ">
+      <div className="bg-brand font-inter h-screen w-screen inset-0 py-6 px-6 2xl:px-[600px] xl:px-[400px] lg:px-[300px] text-white flex flex-col overflow-y-auto">
         <div className="flex justify-between items-center">
           <Link to={`/`}>
             <p className="font-bold">For Developers</p>
