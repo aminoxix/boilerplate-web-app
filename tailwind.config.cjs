@@ -16,7 +16,7 @@ module.exports = {
     extend: {
       colors: {
         brand: "#242424",
-        accent: "#B73535",
+        accent: "#E54D43",
       },
       fontFamily: {
         inter: [ "Inter" ]

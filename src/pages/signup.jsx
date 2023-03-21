@@ -60,7 +60,7 @@ const SignUp = () => {
       !/[A-Za-z0-9!@#$%^&*()_+]/.test(values.rawPassword) ||
       values.rawPassword.length <= 8
     ) {
-      setErrorMessage("Please fill the details carefully");
+      setErrorMessage( <div className="text-red-500 font-semibold text-sm">Please fill the details carefully</div>);
     } else {
       setErrorMessage("");
       createUserWithEmailAndPassword(
