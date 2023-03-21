@@ -5,16 +5,19 @@ import SubTitle from "../components/SubTitle";
 import Title from "../components/Title";
 import { auth } from "../firebase/firebase-config";
 import MenuPage from "../layout/MenuPage";
+import { useNavigate } from "react-router-dom";
 
 
 const Dashboard = () => {
   const [user, setUser] = useAtom(userAtom);
+  const navigate = useNavigate();
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user.displayName);
       } else {
+        navigate('/signin')
         setUser("");
       }
     });

@@ -23,7 +23,7 @@ const Notification = () => {
       </div>
       <div className="flex flex-col flex-1 justify-center items-center">
         <button
-          className="flex justify-center items-center w-80 h-28 rounded-lg bg-accent font-bold text-white text-4xl cursor-pointer"
+          className="flex justify-center items-center w-60 h-20 rounded-lg bg-accent font-bold text-white text-4xl cursor-pointer"
           onClick={() => {
             setCount((prevCount) => prevCount + 1);
             setToast({

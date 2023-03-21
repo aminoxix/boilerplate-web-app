@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuPage from "../layout/MenuPage";
 
 import Title from "../components/Title";
@@ -8,7 +8,11 @@ import Button from "../components/Button";
 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase-config";
-import { useNavigate } from "react-router-dom";
+
+import Box from "@mui/material/Box";
+// import Button from '@mui/material/Button';
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,12 +20,16 @@ const SignUp = () => {
   const [values, setValues] = useState({
     fullName: "",
     registerEmail: "",
-    registerPassword: "",
     rawPassword: "",
+    signedTC: false,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [emailFlag, setEmailFlag] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
 
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
@@ -58,7 +66,7 @@ const SignUp = () => {
       createUserWithEmailAndPassword(
         auth,
         values.registerEmail,
-        values.rawPassword || values.registerPassword
+        values.rawPassword
       )
         .then(async (response) => {
           const user = response.user;
@@ -76,6 +84,34 @@ const SignUp = () => {
 
   return (
     <MenuPage>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        className="flex flex-1 justify-center items-center p-2"
+      >
+        <Box className="flex flex-col w-auto backdrop-blur-sm bg-transparent border-white p-5 rounded-md text-white">
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Our Privacy Policy
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <ol className="pb-5">
+              <li>Introduction to Business</li>
+              <li>Business Contract Details</li>
+              <li>Effective Date</li>
+              <li>Governing Law</li>
+              <li>Limitation of Liability and Warranty Disclaimers</li>
+              <li>Rules of Conduct</li>
+              <li>Intellectual Property Rights</li>
+              <li>User Restrictions</li>
+              <li>Right to Termination</li>
+            </ol>
+            I've read the company's terms and conditions and am prepared to sign
+            up.
+          </Typography>
+        </Box>
+      </Modal>
       <div className="flex flex-1 flex-col">
         <div className="pt-14 flex flex-col">
           <Title innerText="Sign Up" />
@@ -171,10 +207,33 @@ const SignUp = () => {
                 </p>
               </div>
             </div>
+            <div className="flex gap-2">
+              <input
+                type="checkbox"
+                checked={values.signedTC}
+                onChange={(event) => {
+                  updateValue("signedTC", event.target.checked);
+                }}
+              />
+              <label className="flex gap-1 flex-wrap text-[12px] 2xl:text-[16px] xl:text-[16px]">
+                By signing in, you agree to the{" "}
+                <div
+                  className="underline cursor-pointer"
+                  onClick={handleOpenModal}
+                >
+                  Terms & Conditions
+                </div>
+                .
+              </label>
+            </div>
           </div>
           <div className="flex flex-col justify-center items-center pt-6 gap-2">
             <p className="text-[12px] text-white">{errorMessage}</p>
-            <Button innerText="Sign Up" handleClick={handleSubmission} />
+            <Button
+              innerText="Sign Up"
+              handleClick={handleSubmission}
+              handleDisabled={!values.signedTC}
+            />
             <p className="text-[12px]">
               Already have an account?{" "}
               <Link to={`/signin`} className="underline">

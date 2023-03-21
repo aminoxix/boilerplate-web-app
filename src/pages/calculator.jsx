@@ -27,6 +27,11 @@ function calculateResult(first, operation, second) {
   ) {
     return first * second;
   } else if (
+    (operation === "divide" || operation === "div" || operation === "/") &&
+    second === 0
+  ) {
+    return "undefined";
+  } else if (
     operation === "divide" ||
     operation === "div" ||
     operation === "/"
@@ -170,6 +175,9 @@ const Calculator = () => {
           <Button
             innerText="Calculate"
             handleClick={() => dispatch({ type: "calculateResult" })}
+            handleDisabled={
+              !values.firstValue || !values.secondValue || !values.operation
+            }
           />
         </div>
       </div>
