@@ -60,7 +60,7 @@ const SignUp = () => {
       !/[A-Za-z0-9!@#$%^&*()_+]/.test(values.rawPassword) ||
       values.rawPassword.length <= 8
     ) {
-      setErrorMessage( <div className="text-red-500 font-semibold text-sm">Please fill the details carefully</div>);
+      setErrorMessage("Please fill the details carefully");
     } else {
       setErrorMessage("");
       createUserWithEmailAndPassword(
@@ -228,7 +228,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center items-center pt-6 gap-2">
-            <p className="text-[12px] text-white">{errorMessage}</p>
+            <p className="text-[12px] text-accent">{errorMessage}</p>
             <Button
               innerText="Sign Up"
               handleClick={handleSubmission}
