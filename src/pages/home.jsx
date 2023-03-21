@@ -13,7 +13,7 @@ import BrandLogo from "../assets/images/icon.png";
 const Home = (props) => {
   return (
     <main className="bg-brand font-inter h-screen w-screen inset-0 text-white flex flex-col overflow-y-scroll overflow-x-hidden justify-center items-center">
-      <div className="bg-brand font-inter py-6 px-6 2xl:px-[600px] xl:px-[400px] lg:px-[300px] flex flex-col overflow-y-scroll justify-center items-center">
+      <div className="bg-brand font-inter py-6 px-6 2xl:px-[600px] xl:px-[400px] lg:px-[300px] flex flex-col  justify-center items-center">
         <div className="flex flex-col flex-1 justify-center items-center">
           <Title innerText="FOR DEVS" />
           <div className="flex justify-center items-center">
