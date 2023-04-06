@@ -225,7 +225,7 @@ const SignUp = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center items-center pt-6 gap-2">
-            <p className="text-[12px] text-white">{errorMessage}</p>
+            <p className="text-[12px] text-accent">{errorMessage}</p>
             <Button
               innerText="Sign Up"
               handleClick={handleSubmission}
