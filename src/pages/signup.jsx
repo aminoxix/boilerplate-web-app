@@ -35,8 +35,11 @@ const SignUp = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  const handleEmailChange = (email) => {
+  const handleEmailChange = (event) => {
+    const email = event.target.value;
     const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    console.log("type", typeof email);
+    console.log("email", email);
     if (email.match(pattern)) {
       setEmailFlag(true);
       setValues((prev) => ({
