@@ -24,6 +24,7 @@ const SignIn = () => {
     setShowPassword((prevState) => !prevState);
   };
 
+  // Function to handle & validate form submission
   const handleSubmission = () => {
     if (values.registerEmail === "" || values.registerPassword === "") {
       setErrorMessage("Please fill in all the fields");

@@ -4,6 +4,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import MenuPage from "../layout/MenuPage";
 
+// // Initial state for the calculator
 const initialValue = {
   firstValue: 0,
   secondValue: 0,
@@ -11,6 +12,7 @@ const initialValue = {
   result: 0,
 };
 
+// Function to calculate result based on operation
 function calculateResult(first, operation, second) {
   if (operation === "sum" || operation === "add" || operation === "+") {
     return first + second;
@@ -55,6 +57,7 @@ function calculateResult(first, operation, second) {
   throw new Error("Invalid operation");
 }
 
+// Reducer function to update the state based on the action
 const reducer = (draft, action) => {
   switch (action.type) {
     case "setFirstValue":

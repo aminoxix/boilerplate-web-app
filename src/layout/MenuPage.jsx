@@ -15,6 +15,7 @@ const MenuPage = (props) => {
   const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
+    // Check if the user is authenticated and update the user state accordingly
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user.displayName);
@@ -24,6 +25,7 @@ const MenuPage = (props) => {
     });
   }, []);
 
+  // Function to handle user logout
   function logoutUser() {
     auth
       .signOut()
@@ -35,11 +37,12 @@ const MenuPage = (props) => {
       });
   }
 
+  // Function to toggle navbar
   function toggleNavbar() {
     setOpenNav((prevNavbar) => !prevNavbar);
   }
 
-  // toggle navbar on pressing escape key
+  // Toggle navbar on pressing escape key
   useEffect(() => {
     const close = (e) => {
       if (e.keyCode === 27) {
@@ -74,6 +77,7 @@ const MenuPage = (props) => {
           {openNav ? (
             <div className="flex flex-1 justify-center">
               <div className="flex flex-col gap-10 justify-center items-center text-2xl font-bold">
+                {/* Render links for different menu items */}
                 <Link to={`/notification`}>Notification</Link>
                 <Link to={`/calculator`}>Calculator</Link>
                 <Link to={`/gallery`}>Add Image</Link>

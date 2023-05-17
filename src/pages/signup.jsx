@@ -10,13 +10,13 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase-config";
 
 import Box from "@mui/material/Box";
-// import Button from '@mui/material/Button';
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 const SignUp = () => {
   const navigate = useNavigate();
 
+  // State variables
   const [values, setValues] = useState({
     fullName: "",
     registerEmail: "",
@@ -27,19 +27,21 @@ const SignUp = () => {
   const [emailFlag, setEmailFlag] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Modal state and event handlers
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+  // Function to toggle password visibility
   const toggleShowPassword = () => {
     setShowPassword((prevState) => !prevState);
   };
 
+  // Event handler for email input change
   const handleEmailChange = (event) => {
     const email = event.target.value;
     const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    console.log("type", typeof email);
-    console.log("email", email);
+
     if (email.match(pattern)) {
       setEmailFlag(true);
       setValues((prev) => ({
@@ -51,6 +53,7 @@ const SignUp = () => {
     }
   };
 
+  // Event handler for input field changes
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
     setValues((prevValues) => ({
@@ -59,7 +62,9 @@ const SignUp = () => {
     }));
   };
 
+  // Event handler for form submission
   const handleSubmission = () => {
+    // Form validation
     if (
       !values.fullName ||
       !values.registerEmail ||
@@ -70,6 +75,7 @@ const SignUp = () => {
       setErrorMessage("Please fill the details carefully");
     } else {
       setErrorMessage("");
+      // Create user with email and password
       createUserWithEmailAndPassword(
         auth,
         values.registerEmail,
@@ -77,9 +83,11 @@ const SignUp = () => {
       )
         .then(async (response) => {
           const user = response.user;
+          // Update user profile with full name
           await updateProfile(user, {
             displayName: values.fullName,
           });
+          // Navigate to the dashboard
           navigate("/dashboard");
         })
         .catch((error) => {
@@ -88,7 +96,6 @@ const SignUp = () => {
         });
     }
   };
-
   return (
     <MenuPage>
       <Modal

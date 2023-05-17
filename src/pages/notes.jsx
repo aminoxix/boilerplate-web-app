@@ -6,20 +6,23 @@ import { addDoc, collection, query, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase-config";
 import MenuPage from "../layout/MenuPage";
 
-
 const Notes = () => {
   const [text, setText] = useState("");
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "text"));
-    const unSub = onSnapshot(q, (querySnapshot) => {
+    // Fetching data from Firestore on component mount
+    const queryText = query(collection(db, "text"));
+    // Creating a query for the "text" collection
+    const unSub = onSnapshot(queryText, (querySnapshot) => {
       const tempArray = [];
       querySnapshot.forEach((doc) => {
         tempArray.push({ ...doc.data(), id: doc.id });
       });
+      // Updating the state with the fetched data
       setData(tempArray);
     });
+    // Unsubscribing from the snapshot listener on component unmount
     return () => unSub();
   }, []);
 
@@ -28,10 +31,11 @@ const Notes = () => {
 
     if (text !== "") {
       await addDoc(collection(db, "text"), {
+        // Adding a new document to the "text" collection in Firestore
         text,
       });
     }
-    setText("");
+    setText(""); // Clearing the input text field
   };
 
   return (
@@ -59,10 +63,11 @@ const Notes = () => {
             />
           </form>
           <div className="flex flex-col gap-2">
+            {/* Rendering SubTitle component with innerText prop */}
             <SubTitle innerText="Fetched Text" />
             <div className="text-white">
               {data.map((text) => {
-                return <li key={text.id}>{text.text}</li>;
+                return <li key={text.id}>{text.text}</li>; // Rendering the fetched text data as list items
               })}
             </div>
           </div>

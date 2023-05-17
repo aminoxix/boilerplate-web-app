@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { v4 } from "uuid";
 
 const Menu = () => {
+  // Get the current location using the useLocation hook from react-router-dom
   const location = useLocation();
 
   const MenuArray = [
     {
-      id: v4(),
+      id: v4(), // Generate a unique id for each menu item
       image: "calculate",
       title: "Calculator",
     },
@@ -32,6 +33,7 @@ const Menu = () => {
   return (
     <div className="flex flex-1">
       <div className="flex gap-14 bg-black w-full inset-0 h-16 justify-center 2xl:opacity-0 xl:opacity-0 lg:opacity-0 md:justify-around items-center">
+        {/* Render each menu item */}
         {MenuArray.map((menu) => {
           return (
             <Link
@@ -41,6 +43,7 @@ const Menu = () => {
             >
               <div
                 className={`material-symbols-outlined text-3xl text-white ${
+                  // Highlight the menu item if the current location matches its title
                   menu.title.toLowerCase() ==
                     location.pathname.slice(1).toLowerCase() &&
                   `material-symbols-filled-outlined`

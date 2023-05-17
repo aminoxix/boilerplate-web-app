@@ -7,17 +7,18 @@ import { auth } from "../firebase/firebase-config";
 import MenuPage from "../layout/MenuPage";
 import { useNavigate } from "react-router-dom";
 
-
 const Dashboard = () => {
   const [userDisplayName, setUserDisplayName] = useAtom(userAtom);
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Check if user is authenticated and update the user state accordingly
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUserDisplayName(user.displayName);
       } else {
-        navigate('/signin')
+        // If not authenticated, navigate to signin page
+        navigate("/signin");
         setUserDisplayName("");
       }
     });

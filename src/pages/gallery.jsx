@@ -7,7 +7,6 @@ import { storage } from "../firebase/firebase-config";
 import { v4 } from "uuid";
 import MenuPage from "../layout/MenuPage";
 
-
 const Gallery = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
@@ -15,6 +14,7 @@ const Gallery = () => {
 
   const imagesListRef = ref(storage, "images/");
 
+  // Function to upload file to firebase storage
   const uploadFile = () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
@@ -28,6 +28,7 @@ const Gallery = () => {
   };
 
   useEffect(() => {
+    // Retrieve all images from firebase storage and update the imageUrls state
     listAll(imagesListRef).then((response) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {

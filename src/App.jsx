@@ -17,6 +17,7 @@ import Notification from "./pages/notification";
 function App() {
   const [user, setUser] = useAtom(userAtom);
 
+  // Use effect to listen for authentication state changes
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
